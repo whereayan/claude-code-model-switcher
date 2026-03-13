@@ -1,30 +1,79 @@
-# Claude Model Launcher
+# Claude Code Model Switcher
 
 交互式 Claude Code 模型选择器，支持多供应商配置。
 
 ## 安装
 
-```bash
-npm link
-```
-
-或者发布到 npm 后：
+### 从 npm 安装（推荐）
 
 ```bash
 npm install -g claude-code-model-switcher
 ```
 
-## 使用
+### 从 GitHub 安装
 
 ```bash
-ccms
+git clone https://github.com/whereayan/claude-code-model-switcher.git
+cd claude-code-model-switcher
+npm link
+```
+
+### 本地开发
+
+```bash
+git clone https://github.com/whereayan/claude-code-model-switcher.git
+cd claude-code-model-switcher
+npm install
+npm link
+```
+
+## 使用
+
+### 交互模式
+
+```bash
+ccms                    # 选择一个模型，所有类型使用相同模型
+ccms --multi            # 分别为 Default/Opus/Sonnet/Haiku 选择模型
+```
+
+### 命令行模式
+
+```bash
+ccms qwen3.5-plus                          # 直接指定模型（所有类型相同）
+ccms --opus gpt-4                          # 只设置 Opus 模型
+ccms --sonnet gpt-3.5-turbo                # 只设置 Sonnet 模型
+ccms --haiku glm-5                         # 只设置 Haiku 模型
+ccms --model qwen3-max                     # 只设置默认模型
+ccms --opus gpt-4 --sonnet gpt-3.5-turbo   # 组合设置多个模型
+```
+
+### 其他命令
+
+```bash
+ccms --version         # 查看版本
+ccms --help            # 查看帮助
 ```
 
 ## 操作说明
 
+交互模式下：
+
 - ↑/↓ 方向键：选择模型
-- Enter：确认选择，启动 Claude Code
+- Enter：确认选择
 - Esc：退出
+
+## 环境变量
+
+`ccms` 会设置以下环境变量：
+
+| 环境变量 | 说明 |
+|---------|------|
+| `ANTHROPIC_MODEL` | 默认模型 |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL` | Opus 模型 |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL` | Sonnet 模型 |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL` | Haiku 模型 |
+| `ANTHROPIC_BASE_URL` | API 基础地址 |
+| `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` | 认证密钥 |
 
 ## 配置
 
