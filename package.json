@@ -16,5 +16,13 @@
   "files": [
     "bin/",
     "config.example.json"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whereayan/claude-code-model-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/whereayan/claude-code-model-switcher/issues"
+  },
+  "homepage": "https://github.com/whereayan/claude-code-model-switcher#readme"
 }
