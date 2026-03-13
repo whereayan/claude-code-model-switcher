@@ -1,6 +1,6 @@
 {
   "name": "claude-code-model-switcher",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Interactive model selector for Claude Code",
   "bin": {
     "ccms": "bin/ccms.js"
