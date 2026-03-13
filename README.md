@@ -27,6 +27,34 @@ npm install
 npm link
 ```
 
+## 卸载
+
+### 卸载 npm 全局安装
+
+```bash
+npm uninstall -g claude-code-model-switcher
+```
+
+### 卸载本地链接
+
+```bash
+# 进入项目目录
+cd claude-code-model-switcher
+npm unlink
+```
+
+### 清理配置文件（可选）
+
+卸载后配置文件会保留，如需完全清理：
+
+```bash
+# Windows
+rmdir /s "%USERPROFILE%\.claude-model-launcher"
+
+# macOS/Linux
+rm -rf ~/.claude-model-launcher
+```
+
 ## 使用
 
 ### 交互模式

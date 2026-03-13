@@ -16,6 +16,13 @@ try {
 
 const VERSION = packageJson.version || '1.0.0';
 
+function clearTerminal() {
+  if (process.platform === 'win32') {
+    console.clear();
+  }
+  process.stdout.write('\x1b[2J\x1b[H\x1b[3J');
+}
+
 // Parse command line arguments
 const args = process.argv.slice(2);
 
@@ -272,8 +279,7 @@ const modelTypes = [
 ];
 
 function drawMenu(multiStep = false) {
-  // Clear screen and move cursor to top
-  process.stdout.write('\x1b[2J\x1b[H');
+  clearTerminal();
   
   if (multiStep) {
     // Multi-select mode header
@@ -374,6 +380,7 @@ function selectModel() {
 function launchWithModels(models) {
   const selected = modelList[selectedIndex];
   
+  clearTerminal();
   console.log('');
   console.log('\x1b[32mSelected models:\x1b[0m');
   console.log(`  Default: ${models.default}`);
