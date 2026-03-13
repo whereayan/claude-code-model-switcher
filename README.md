@@ -17,7 +17,7 @@ npm install -g claude-code-model-switcher
 ## 使用
 
 ```bash
-cml
+ccms
 ```
 
 ## 操作说明
