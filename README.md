@@ -45,6 +45,7 @@ ccms
       "id": "aliyuncs",
       "label": "aliyuncs",
       "baseUrl": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "authType": "ANTHROPIC_API_KEY",
       "apiKey": "your-api-key-here",
       "models": [
         "qwen3.5-plus",
@@ -54,13 +55,14 @@ ccms
       ]
     },
     {
-      "id": "openai",
-      "label": "OpenAI",
-      "baseUrl": "https://api.openai.com/v1",
-      "apiKey": "your-openai-api-key",
+      "id": "custom-provider",
+      "label": "Custom Provider",
+      "baseUrl": "https://api.custom-provider.com/v1",
+      "authType": "ANTHROPIC_AUTH_TOKEN",
+      "apiKey": "your-auth-token-here",
       "models": [
-        "gpt-4",
-        "gpt-4-turbo"
+        "model-1",
+        "model-2"
       ]
     }
   ]
@@ -76,8 +78,16 @@ ccms
 | `suppliers[].id` | 供应商唯一标识 |
 | `suppliers[].label` | 供应商显示名称 |
 | `suppliers[].baseUrl` | API 基础地址 |
-| `suppliers[].apiKey` | API 密钥 |
+| `suppliers[].authType` | 认证类型：`ANTHROPIC_API_KEY` 或 `ANTHROPIC_AUTH_TOKEN`（默认 `ANTHROPIC_API_KEY`） |
+| `suppliers[].apiKey` | API 密钥或 Token |
 | `suppliers[].models` | 可用模型列表 |
+
+### authType 说明
+
+| 值 | 适用场景 |
+|-----|---------|
+| `ANTHROPIC_API_KEY` | 直接使用 Anthropic API 或大多数第三方代理（默认） |
+| `ANTHROPIC_AUTH_TOKEN` | 使用 OAuth Token 或特定平台认证 |
 
 ## License
 

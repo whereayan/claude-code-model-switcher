@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Interactive model selector for Claude Code",
   "bin": {
-    "ccms": "./bin/cml.js"
+    "ccms": "bin/ccms.js"
   },
   "keywords": [
     "claude",

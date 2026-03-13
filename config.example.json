@@ -5,6 +5,7 @@
       "id": "aliyuncs",
       "label": "aliyuncs",
       "baseUrl": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "authType": "ANTHROPIC_API_KEY",
       "apiKey": "",
       "models": [
         "qwen3.5-plus",

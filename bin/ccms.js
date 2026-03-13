@@ -5,6 +5,54 @@ const path = require('path');
 const os = require('os');
 const { spawn } = require('child_process');
 
+// Read package.json for version
+const packageJsonPath = path.join(__dirname, '..', 'package.json');
+let packageJson = {};
+try {
+  packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+} catch (e) {
+  // Ignore error
+}
+
+const VERSION = packageJson.version || '1.0.0';
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+
+// Handle --version, -v
+if (args.includes('--version') || args.includes('-v')) {
+  console.log(`ccms v${VERSION}`);
+  console.log('Claude Code Model Switcher');
+  process.exit(0);
+}
+
+// Handle --help, -h
+if (args.includes('--help') || args.includes('-h')) {
+  console.log('');
+  console.log(`\x1b[1mccms\x1b[0m - Claude Code Model Switcher v${VERSION}`);
+  console.log('');
+  console.log('\x1b[1mUSAGE\x1b[0m');
+  console.log('  ccms              Start interactive model selector');
+  console.log('  ccms --version    Show version information');
+  console.log('  ccms --help       Show this help message');
+  console.log('');
+  console.log('\x1b[1mCONFIG\x1b[0m');
+  console.log(`  Config file: ${path.join(os.homedir(), '.claude-model-launcher', 'config.json')}`);
+  console.log('');
+  console.log('\x1b[1mKEYS\x1b[0m');
+  console.log('  ↑/↓  Select model');
+  console.log('  Enter  Confirm and launch Claude Code');
+  console.log('  Esc  Exit');
+  console.log('');
+  console.log('\x1b[1mAUTHOR\x1b[0m');
+  console.log(`  ${packageJson.author || 'whereyan'}`);
+  console.log('');
+  console.log('\x1b[1mREPOSITORY\x1b[0m');
+  console.log(`  ${packageJson.homepage || 'https://github.com/whereyan/claude-code-model-switcher'}`);
+  console.log('');
+  process.exit(0);
+}
+
 // Config directory in user home
 const configDir = path.join(os.homedir(), '.claude-model-launcher');
 const configPath = path.join(configDir, 'config.json');
@@ -50,7 +98,8 @@ for (const supplier of config.suppliers || []) {
       model: model,
       supplier: supplier.label || supplier.id,
       baseUrl: supplier.baseUrl,
-      apiKey: supplier.apiKey
+      apiKey: supplier.apiKey,
+      authType: supplier.authType || 'ANTHROPIC_API_KEY' // Default to ANTHROPIC_API_KEY
     });
   }
 }
@@ -124,13 +173,20 @@ function selectModel() {
   process.stdin.setRawMode(false);
   process.stdin.pause();
   
-  // Set environment variables
+  // Set environment variables based on authType
   const env = {
     ...process.env,
     ANTHROPIC_MODEL: selected.model,
-    ANTHROPIC_BASE_URL: selected.baseUrl,
-    ANTHROPIC_API_KEY: selected.apiKey
+    ANTHROPIC_BASE_URL: selected.baseUrl
   };
+  
+  // Set auth environment variable based on authType
+  const authType = selected.authType || 'ANTHROPIC_API_KEY';
+  if (authType === 'ANTHROPIC_AUTH_TOKEN') {
+    env.ANTHROPIC_AUTH_TOKEN = selected.apiKey;
+  } else {
+    env.ANTHROPIC_API_KEY = selected.apiKey;
+  }
   
   // Spawn claude process
   const claude = spawn('claude', [], {
