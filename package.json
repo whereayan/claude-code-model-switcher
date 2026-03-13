@@ -1,0 +1,20 @@
+{
+  "name": "claude-code-model-switcher",
+  "version": "1.0.0",
+  "description": "Interactive model selector for Claude Code",
+  "bin": {
+    "cml": "./bin/cml.js"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "model-selector",
+    "model-switcher"
+  ],
+  "author": "whereyan",
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "config.example.json"
+  ]
+}

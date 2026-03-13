@@ -1,0 +1,17 @@
+{
+  "defaultSupplierId": "aliyuncs",
+  "suppliers": [
+    {
+      "id": "aliyuncs",
+      "label": "aliyuncs",
+      "baseUrl": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "apiKey": "",
+      "models": [
+        "qwen3.5-plus",
+        "glm-5",
+        "kimi-k2.5",
+        "qwen3-max"
+      ]
+    }
+  ]
+}
